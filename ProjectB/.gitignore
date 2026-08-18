@@ -48,6 +48,9 @@ SourceArt/**/*.tga
 
 # Binary Files
 Binaries/*
+
+# Docs (local notes, not for repo)
+Docs/
 Plugins/**/Binaries/*
 
 # Builds
