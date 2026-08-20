@@ -26,5 +26,7 @@ void APBBaseCharacter::PossessedBy(AController* NewController)
 	if (PBAbilitySystemComponent)
 	{
 		PBAbilitySystemComponent->InitAbilityActorInfo(this, this);
+
+		ensureMsgf(!CharacterStartUpData.IsNull(), TEXT("StartUp Data Is Null : %s"), *GetName());
 	}
 }

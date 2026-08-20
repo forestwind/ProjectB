@@ -7,6 +7,7 @@
 #include "AbilitySystemInterface.h"
 #include "PBBaseCharacter.generated.h"
 
+class UPBStartUpDataBase;
 class UPBAttributeSet;
 class UPBAbilitySystemComponent;
 
@@ -20,7 +21,7 @@ public:
 	APBBaseCharacter();
 	
 	//~ Begin IAbilitySystemInterface Interface.
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const;
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	//~ End IAbilitySystemInterface Interface
 	
 protected:
@@ -34,6 +35,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AbilitySystem")
 	TObjectPtr<UPBAttributeSet> PBAttributeSet;
 	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="CharacterData")
+	TSoftObjectPtr<UPBStartUpDataBase> CharacterStartUpData;
 public:
 	
 	FORCEINLINE UPBAbilitySystemComponent* GetPBAbilitySystemComponent() const { return PBAbilitySystemComponent; }

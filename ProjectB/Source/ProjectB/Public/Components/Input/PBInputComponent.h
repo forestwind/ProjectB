@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "EnhancedInputComponent.h"
-#include "DataAssets/Input/DA_InputConfig.h"
+#include "DataAssets/Input/PBInputConfig.h"
 #include "PBDebugHelper.h"
 #include "PBInputComponent.generated.h"
 
@@ -18,11 +18,11 @@ class PROJECTB_API UPBInputComponent : public UEnhancedInputComponent
 
 public:
 	template <class UserObject, class CallbackFunc>
-	void BindNativeInputAction(const UDA_InputConfig* InInputConfig, const FGameplayTag& InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func);
+	void BindNativeInputAction(const UPBInputConfig* InInputConfig, const FGameplayTag& InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func);
 };
 
 template <class UserObject, class CallbackFunc>
-void UPBInputComponent::BindNativeInputAction(const UDA_InputConfig* InInputConfig, const FGameplayTag& InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func)
+void UPBInputComponent::BindNativeInputAction(const UPBInputConfig* InInputConfig, const FGameplayTag& InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func)
 {
 	checkf(InInputConfig, TEXT("Input config data is Null"));
 

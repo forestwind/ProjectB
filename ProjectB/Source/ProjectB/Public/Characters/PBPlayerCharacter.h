@@ -8,7 +8,7 @@
 
 class USpringArmComponent;
 class UCameraComponent;
-class UDA_InputConfig;
+class UPBInputConfig;
 struct FInputActionValue;
 /**
  *
@@ -44,7 +44,7 @@ private:
 #pragma region Input
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="CharacterData", meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UDA_InputConfig> InputConfigDataAsset;
+	TObjectPtr<UPBInputConfig> InputConfigDataAsset;
 
 	void Input_Move(const FInputActionValue& InputActionValue);
 	void Input_Look(const FInputActionValue& InputActionValue);

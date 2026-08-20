@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "GameplayTagContainer.h"
-#include "DA_InputConfig.generated.h"
+#include "PBInputConfig.generated.h"
 
 class UInputAction;
 class UInputMappingContext;
@@ -27,7 +27,7 @@ public:
  * 
  */
 UCLASS()
-class PROJECTB_API UDA_InputConfig : public UDataAsset
+class PROJECTB_API UPBInputConfig : public UDataAsset
 {
 	GENERATED_BODY()
 	

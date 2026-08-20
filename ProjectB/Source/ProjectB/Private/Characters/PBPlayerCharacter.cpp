@@ -8,12 +8,13 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "DataAssets/Input/DA_InputConfig.h"
+#include "DataAssets/Input/PBInputConfig.h"
 #include "Components/Input/PBInputComponent.h"
 #include "PBGameplayTags.h"
 #include "AbilitySystem/PBAbilitySystemComponent.h"
 
 #include "PBDebugHelper.h"
+#include "DataAssets/StartUpData/PBStartUpDataBase.h"
 
 APBPlayerCharacter::APBPlayerCharacter()
 {
@@ -43,10 +44,12 @@ void APBPlayerCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	if (PBAbilitySystemComponent && PBAttributeSet)
+	if (!CharacterStartUpData.IsNull())
 	{
-		const FString ASCText = FString::Printf(TEXT("Owner Actor : %s , Avatar Actor : %s"), *PBAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *PBAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
-		Debug::Log(TEXT("ASC is Valid. ") + ASCText);
+		if (UPBStartUpDataBase* LoadedData = CharacterStartUpData.LoadSynchronous())
+		{
+			LoadedData->GiveToAbilitySystemComponent(PBAbilitySystemComponent);
+		}
 	}
 }
 
