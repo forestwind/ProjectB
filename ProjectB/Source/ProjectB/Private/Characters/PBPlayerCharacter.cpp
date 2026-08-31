@@ -11,10 +11,10 @@
 #include "DataAssets/Input/PBInputConfig.h"
 #include "Components/Input/PBInputComponent.h"
 #include "PBGameplayTags.h"
-#include "AbilitySystem/PBAbilitySystemComponent.h"
-
-#include "PBDebugHelper.h"
 #include "DataAssets/StartUpData/PBStartUpDataBase.h"
+#include "AbilitySystem/PBAbilitySystemComponent.h"
+#include "Components/Combat/PBPlayerCombatComponent.h"
+#include "PBDebugHelper.h"
 
 APBPlayerCharacter::APBPlayerCharacter()
 {
@@ -38,6 +38,8 @@ APBPlayerCharacter::APBPlayerCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 400.0f, 0.0f);
 	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
+	
+	PlayerCombatComponent = CreateDefaultSubobject<UPBPlayerCombatComponent>("PlayerCombatComponent");
 }
 
 void APBPlayerCharacter::PossessedBy(AController* NewController)

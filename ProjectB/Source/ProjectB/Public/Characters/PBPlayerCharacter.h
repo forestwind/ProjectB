@@ -10,6 +10,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UPBInputConfig;
 struct FInputActionValue;
+class UPBPlayerCombatComponent;
 /**
  *
  */
@@ -22,11 +23,10 @@ public:
 	APBPlayerCharacter();
 
 protected:
-	
 	//~ Begin APawn Interface.
 	virtual void PossessedBy(AController* NewController) override;
 	//~ End APawn Interface
-	
+
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 private:
@@ -38,6 +38,8 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Camera", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCameraComponent> FollowCamera;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UPBPlayerCombatComponent> PlayerCombatComponent;
 #pragma endregion
 
 
@@ -48,6 +50,9 @@ private:
 
 	void Input_Move(const FInputActionValue& InputActionValue);
 	void Input_Look(const FInputActionValue& InputActionValue);
-	
+
 #pragma endregion
+
+public:
+	FORCEINLINE UPBPlayerCombatComponent* GetPlayerCombatComponent() const { return PlayerCombatComponent; }
 };

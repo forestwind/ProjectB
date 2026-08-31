@@ -9,4 +9,7 @@ namespace PBGameplayTags
 	/** Input **/
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Move)
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Look)
+	
+	/** Player **/
+	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Weapon_Sword);
 }
