@@ -82,5 +82,8 @@ DerivedDataCache/*
 # Rider/ReSharper user-specific settings
 *.DotSettings.user
 
+# RiderLink plugin (auto-installed by Rider)
+Plugins/Developer/RiderLink/
+
 # External Resources
 Content/External
