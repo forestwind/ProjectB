@@ -8,7 +8,7 @@
 void UPBGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
 {
 	Super::OnGiveAbility(ActorInfo, Spec);
-	
+
 	if (AbilityActivationPolicy == EPBAbilityActivationPolicy::OnGiven)
 	{
 		if (ActorInfo && !Spec.IsActive())
@@ -21,7 +21,7 @@ void UPBGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInf
 void UPBGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
-	
+
 	if (AbilityActivationPolicy == EPBAbilityActivationPolicy::OnGiven)
 	{
 		if (ActorInfo)
@@ -31,7 +31,12 @@ void UPBGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, con
 	}
 }
 
-UPBPawnCombatComponent* UPBGameplayAbility::GetPawnCombatComponentFromActorInfo() const
+UPBPawnCombatComponent* UPBGameplayAbility::GetPBPawnCombatComponentFromActorInfo() const
 {
 	return GetAvatarActorFromActorInfo()->FindComponentByClass<UPBPawnCombatComponent>();
+}
+
+UPBAbilitySystemComponent* UPBGameplayAbility::GetPBAbilitySystemComponentFromActorInfo() const
+{
+	return Cast<UPBAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
 }
