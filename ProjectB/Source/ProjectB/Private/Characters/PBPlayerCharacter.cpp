@@ -38,7 +38,7 @@ APBPlayerCharacter::APBPlayerCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 400.0f, 0.0f);
 	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
-	
+
 	PlayerCombatComponent = CreateDefaultSubobject<UPBPlayerCombatComponent>("PlayerCombatComponent");
 }
 
@@ -71,6 +71,8 @@ void APBPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	UPBInputComponent* PBInputComponent = CastChecked<UPBInputComponent>(PlayerInputComponent);
 	PBInputComponent->BindNativeInputAction(InputConfigDataAsset, PBGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 	PBInputComponent->BindNativeInputAction(InputConfigDataAsset, PBGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
+
+	PBInputComponent->BindAbilityInputAction(InputConfigDataAsset, this, &ThisClass::Input_AbilityInputPressed, &ThisClass::Input_AbilityInputReleased);
 }
 
 void APBPlayerCharacter::Input_Move(const FInputActionValue& InputActionValue)
@@ -104,4 +106,14 @@ void APBPlayerCharacter::Input_Look(const FInputActionValue& InputActionValue)
 	{
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void APBPlayerCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
+{
+	PBAbilitySystemComponent->OnAbilityInputPressed(InInputTag);
+}
+
+void APBPlayerCharacter::Input_AbilityInputReleased(FGameplayTag InInputTag)
+{
+	PBAbilitySystemComponent->OnAbilityInputReleased(InInputTag);
 }

@@ -18,14 +18,14 @@ class PROJECTB_API UPBInputComponent : public UEnhancedInputComponent
 
 public:
 	template <class UserObject, class CallbackFunc>
-	void BindNativeInputAction(const UPBInputConfig* InInputConfig, const FGameplayTag& InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func);
+	void BindNativeInputAction(const UPBInputConfig* InInputConfig, FGameplayTag InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func);
 
 	template <class UserObject, class CallbackFunc>
 	void BindAbilityInputAction(const UPBInputConfig* InInputConfig, UserObject* ContextObject, CallbackFunc InputPressedFunc, CallbackFunc InputReleasedFunc);
 };
 
 template <class UserObject, class CallbackFunc>
-void UPBInputComponent::BindNativeInputAction(const UPBInputConfig* InInputConfig, const FGameplayTag& InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func)
+void UPBInputComponent::BindNativeInputAction(const UPBInputConfig* InInputConfig, FGameplayTag InInputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func)
 {
 	checkf(InInputConfig, TEXT("Input config data is Null"));
 

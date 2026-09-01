@@ -3,7 +3,7 @@
 
 #include "DataAssets/Input/PBInputConfig.h"
 
-UInputAction* UPBInputConfig::FindNativeInputActionByTag(const FGameplayTag& InInputTag) const
+UInputAction* UPBInputConfig::FindNativeInputActionByTag(FGameplayTag InInputTag) const
 {
 	for (const FPBInputActionConfig& InputActionConfig : NativeInputActions)
 	{
