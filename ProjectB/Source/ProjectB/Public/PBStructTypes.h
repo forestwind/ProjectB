@@ -2,9 +2,26 @@
 
 #pragma once
 
+#include "GameplayTagContainer.h"
 #include "PBStructTypes.generated.h"
 
+class UInputMappingContext;
 class UPBPlayerLinkedAnimLayer;
+class UPBGameplayAbility;
+
+USTRUCT(BlueprintType)
+struct FPBPlayerAbilitySet
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "InputTag"))
+	FGameplayTag InputTag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UPBGameplayAbility> AbilityToGrant;
+
+	bool IsValid() const;
+};
 
 USTRUCT(BlueprintType)
 struct FPBPlayerWeaponData
@@ -13,4 +30,10 @@ struct FPBPlayerWeaponData
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UPBPlayerLinkedAnimLayer> WeaponAnimLayerToLink;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<UInputMappingContext> WeaponInputMappingContext;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
+	TArray<FPBPlayerAbilitySet> DefaultWeaponAbilities;
 };

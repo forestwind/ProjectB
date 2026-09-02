@@ -2,3 +2,10 @@
 
 
 #include "PBStructTypes.h"
+
+#include "AbilitySystem/Abilities/PBGameplayAbility.h"
+
+bool FPBPlayerAbilitySet::IsValid() const
+{
+	return InputTag.IsValid() && AbilityToGrant;
+}

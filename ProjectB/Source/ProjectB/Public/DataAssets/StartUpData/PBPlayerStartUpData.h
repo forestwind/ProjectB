@@ -3,23 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameplayTagContainer.h"
 #include "DataAssets/StartUpData/PBStartUpDataBase.h"
+#include "PBStructTypes.h"
 #include "PBPlayerStartUpData.generated.h"
-
-USTRUCT(BlueprintType)
-struct FPBPlayerAbilitySet
-{
-	GENERATED_BODY()
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "InputTag"))
-	FGameplayTag InputTag;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UPBGameplayAbility> AbilityToGrant;
-
-	bool IsValid() const;
-};
 
 /**
  *

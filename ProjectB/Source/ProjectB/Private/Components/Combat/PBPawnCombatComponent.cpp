@@ -28,7 +28,7 @@ APBWeaponBase* UPBPawnCombatComponent::GetCharacterCarriedWeaponByTag(FGameplayT
 
 APBWeaponBase* UPBPawnCombatComponent::GetCharacterCurrentEquippedWeapon() const
 {
-	if (CurrentEquippedWeaponTag.IsValid())
+	if (!CurrentEquippedWeaponTag.IsValid())
 	{
 		return nullptr;
 	}

@@ -2,6 +2,7 @@
 
 
 #include "AbilitySystem/PBAbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/PBGameplayAbility.h"
 
 void UPBAbilitySystemComponent::OnAbilityInputPressed(FGameplayTag InputTag)
 {
@@ -20,4 +21,24 @@ void UPBAbilitySystemComponent::OnAbilityInputPressed(FGameplayTag InputTag)
 
 void UPBAbilitySystemComponent::OnAbilityInputReleased(FGameplayTag InputTag)
 {
+}
+
+void UPBAbilitySystemComponent::GrantPlayerWeaponAbilities(const TArray<FPBPlayerAbilitySet>& InDefaultWeaponAbilities, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandles)
+{
+	if (InDefaultWeaponAbilities.IsEmpty())
+	{
+		return;
+	}
+	
+	for (const FPBPlayerAbilitySet& AbilitySet : InDefaultWeaponAbilities)
+	{
+		if (!AbilitySet.IsValid()) continue;
+	
+		FGameplayAbilitySpec AbilitySpec(AbilitySet.AbilityToGrant);
+		AbilitySpec.SourceObject = GetAvatarActor();
+		AbilitySpec.Level = ApplyLevel;
+		AbilitySpec.DynamicAbilityTags.AddTag(AbilitySet.InputTag);
+		
+		OutGrantedAbilitySpecHandles.AddUnique(GiveAbility(AbilitySpec));
+	}
 }
