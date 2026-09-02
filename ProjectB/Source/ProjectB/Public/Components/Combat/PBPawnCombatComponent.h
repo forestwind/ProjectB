@@ -17,16 +17,16 @@ class PROJECTB_API UPBPawnCombatComponent : public UPBPawnExtensionComponentBase
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	UFUNCTION(BlueprintCallable, Category = "PB|Combat")
 	void RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister, APBWeaponBase* InWeaponToRegister, bool bRegisterAsEquippedWeapon = false);
 
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	UFUNCTION(BlueprintCallable, Category = "PB|Combat")
 	APBWeaponBase* GetCharacterCarriedWeaponByTag(FGameplayTag InWeaponTagToGet) const;
 	
-	UPROPERTY(BlueprintReadWrite, Category = "Warrior|Combat")
+	UPROPERTY(BlueprintReadWrite, Category = "PB|Combat")
 	FGameplayTag CurrentEquippedWeaponTag;
 	
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
+	UFUNCTION(BlueprintCallable, Category = "PB|Combat")
 	APBWeaponBase* GetCharacterCurrentEquippedWeapon() const;
 	
 private:

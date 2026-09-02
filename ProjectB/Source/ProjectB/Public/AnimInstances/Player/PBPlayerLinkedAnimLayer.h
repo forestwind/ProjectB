@@ -14,4 +14,8 @@ class PROJECTB_API UPBPlayerLinkedAnimLayer : public UPBBaseAnimInstance
 {
 	GENERATED_BODY()
 	
+public:
+	UFUNCTION(BlueprintPure, meta = (BlueprintThreadSafe))
+	UPBPlayerAnimInstance* GetPlayerAnimInstance() const;
+	
 };

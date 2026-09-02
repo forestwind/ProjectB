@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Items/Weapons/PBWeaponBase.h"
+#include "PBStructTypes.h"
 #include "PBPlayerWeapon.generated.h"
 
 /**
@@ -14,4 +15,7 @@ class PROJECTB_API APBPlayerWeapon : public APBWeaponBase
 {
 	GENERATED_BODY()
 	
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category= "WeaponData")
+	FPBPlayerWeaponData PlayerWeaponData;
 };
