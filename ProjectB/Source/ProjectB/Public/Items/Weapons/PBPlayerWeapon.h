@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Items/Weapons/PBWeaponBase.h"
 #include "PBStructTypes.h"
+#include "GameplayAbilitySpecHandle.h"
 #include "PBPlayerWeapon.generated.h"
 
 /**
@@ -18,4 +19,13 @@ class PROJECTB_API APBPlayerWeapon : public APBWeaponBase
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category= "WeaponData")
 	FPBPlayerWeaponData PlayerWeaponData;
+	
+	UFUNCTION(BlueprintCallable)
+	void AssignGrantedAbilitySpecHandles(const TArray<FGameplayAbilitySpecHandle>& InSpecHandles);
+	
+	UFUNCTION(BlueprintPure)
+	TArray<FGameplayAbilitySpecHandle> GetGrantedAbilitySpecHandles() const;
+	
+private:
+	TArray<FGameplayAbilitySpecHandle> GrantedAbilitySpecHandles;
 };

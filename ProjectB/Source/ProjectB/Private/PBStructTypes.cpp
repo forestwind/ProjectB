@@ -3,7 +3,7 @@
 
 #include "PBStructTypes.h"
 
-#include "AbilitySystem/Abilities/PBGameplayAbility.h"
+#include "AbilitySystem/Abilities/PBPlayerGameplayAbility.h"
 
 bool FPBPlayerAbilitySet::IsValid() const
 {

@@ -2,7 +2,8 @@
 
 
 #include "AbilitySystem/PBAbilitySystemComponent.h"
-#include "AbilitySystem/Abilities/PBGameplayAbility.h"
+
+#include "AbilitySystem/Abilities/PBPlayerGameplayAbility.h"
 
 void UPBAbilitySystemComponent::OnAbilityInputPressed(FGameplayTag InputTag)
 {
@@ -41,4 +42,22 @@ void UPBAbilitySystemComponent::GrantPlayerWeaponAbilities(const TArray<FPBPlaye
 		
 		OutGrantedAbilitySpecHandles.AddUnique(GiveAbility(AbilitySpec));
 	}
+}
+
+void UPBAbilitySystemComponent::RemoveGrantedPlayerWeaponAbilities(UPARAM(ref) TArray<FGameplayAbilitySpecHandle>& InSpecHandlesToRemove)
+{
+	if (InSpecHandlesToRemove.IsEmpty())
+	{
+		return;
+	}
+	
+	for (const FGameplayAbilitySpecHandle& SpecHandle : InSpecHandlesToRemove)
+	{
+		if (SpecHandle.IsValid())
+		{
+			ClearAbility(SpecHandle);
+		}
+	}
+	
+	InSpecHandlesToRemove.Empty();
 }

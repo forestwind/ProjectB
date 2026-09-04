@@ -7,7 +7,7 @@
 
 class UInputMappingContext;
 class UPBPlayerLinkedAnimLayer;
-class UPBGameplayAbility;
+class UPBPlayerGameplayAbility;
 
 USTRUCT(BlueprintType)
 struct FPBPlayerAbilitySet
@@ -18,7 +18,7 @@ struct FPBPlayerAbilitySet
 	FGameplayTag InputTag;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UPBGameplayAbility> AbilityToGrant;
+	TSubclassOf<UPBPlayerGameplayAbility> AbilityToGrant;
 
 	bool IsValid() const;
 };
