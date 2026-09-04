@@ -8,14 +8,21 @@
 
 UPBAbilitySystemComponent* UPBFunctionLibrary::NativeGetPBASCFromActor(AActor* InActor)
 {
-	check(InActor);
+	if (!InActor)
+	{
+		return nullptr;
+	}
 
-	return CastChecked<UPBAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(InActor));
+	return Cast<UPBAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(InActor));
 }
 
 void UPBFunctionLibrary::AddGameplayTagToActorIfNone(AActor* InActor, FGameplayTag TagToAdd)
 {
 	UPBAbilitySystemComponent* ASC = NativeGetPBASCFromActor(InActor);
+	if (!ASC)
+	{
+		return;
+	}
 
 	if (!ASC->HasMatchingGameplayTag(TagToAdd))
 	{
@@ -26,6 +33,10 @@ void UPBFunctionLibrary::AddGameplayTagToActorIfNone(AActor* InActor, FGameplayT
 void UPBFunctionLibrary::RemoveGameplayTagFromActorIfFound(AActor* InActor, FGameplayTag TagToRemove)
 {
 	UPBAbilitySystemComponent* ASC = NativeGetPBASCFromActor(InActor);
+	if (!ASC)
+	{
+		return;
+	}
 
 	if (ASC->HasMatchingGameplayTag(TagToRemove))
 	{
@@ -36,6 +47,10 @@ void UPBFunctionLibrary::RemoveGameplayTagFromActorIfFound(AActor* InActor, FGam
 bool UPBFunctionLibrary::NativeDoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck)
 {
 	UPBAbilitySystemComponent* ASC = NativeGetPBASCFromActor(InActor);
+	if (!ASC)
+	{
+		return false;
+	}
 
 	return ASC->HasMatchingGameplayTag(TagToCheck);
 }
