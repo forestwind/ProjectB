@@ -6,7 +6,9 @@
 
 namespace PBGameplayTags
 {
+	
 	/** Input **/
+	
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Move)
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Look)
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_EquipSword)
@@ -14,7 +16,9 @@ namespace PBGameplayTags
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_LightAttack_Sword)
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_HeavyAttack_Sword)
 	
+	
 	/** Player **/
+	
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Equip_Sword);
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Unequip_Sword);
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Attack_Light_Sword);
@@ -26,4 +30,15 @@ namespace PBGameplayTags
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_Unequip_Sword);
 	
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_JumpToFinisher);
+	
+	
+	/** Enemy **/
+	
+	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Weapon);
+	
+	
+	
+	/** Shared **/
+	
+	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_MeleeHit);
 }

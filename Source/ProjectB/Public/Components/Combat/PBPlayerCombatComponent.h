@@ -18,4 +18,7 @@ class PROJECTB_API UPBPlayerCombatComponent : public UPBPawnCombatComponent
 public:
 	UFUNCTION(BlueprintCallable, Category = "PB|Combat")
 	APBPlayerWeapon* GetPlayerCarriedWeaponByTag(FGameplayTag InWeaponTag) const;
+	
+	virtual void OnHitTargetActor(AActor* HitActor) override;
+	virtual void OnWeaponPulledFromTargetActor(AActor* InteractionActor) override;
 };

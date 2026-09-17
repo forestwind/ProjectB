@@ -18,6 +18,10 @@ class PROJECTB_API APBEnemyCharacter : public APBBaseCharacter
 public:
 	APBEnemyCharacter();
 
+	//~ Begin IPBPawnCombatInterface Interface.
+	virtual UPBPawnCombatComponent* GetPBPawnCombatComponent() const override;
+	//~ End IPBPawnCombatInterface Interface
+	
 protected:
 	
 	//~ Begin APawn Interface.

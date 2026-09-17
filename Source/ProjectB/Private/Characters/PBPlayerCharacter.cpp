@@ -42,6 +42,11 @@ APBPlayerCharacter::APBPlayerCharacter()
 	PlayerCombatComponent = CreateDefaultSubobject<UPBPlayerCombatComponent>("PlayerCombatComponent");
 }
 
+UPBPawnCombatComponent* APBPlayerCharacter::GetPBPawnCombatComponent() const
+{
+	return PlayerCombatComponent;
+}
+
 void APBPlayerCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);

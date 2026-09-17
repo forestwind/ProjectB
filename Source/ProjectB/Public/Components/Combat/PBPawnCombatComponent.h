@@ -8,6 +8,16 @@
 #include "PBPawnCombatComponent.generated.h"
 
 class APBWeaponBase;
+
+
+UENUM(BlueprintType)
+enum class EPBToggleDamageType : uint8
+{
+	CurrentEquippedWeapon,
+	LeftHand,
+	RightHand,
+};
+
 /**
  *
  */
@@ -28,6 +38,17 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "PB|Combat")
 	APBWeaponBase* GetCharacterCurrentEquippedWeapon() const;
+	
+	UFUNCTION(BlueprintCallable, Category = "PB|Combat")
+	void ToggleWeaponCollision(bool bShouldEnable, EPBToggleDamageType ToggleDamageType = EPBToggleDamageType::CurrentEquippedWeapon);
+	
+	virtual void OnHitTargetActor(AActor* HitActor);
+	virtual void OnWeaponPulledFromTargetActor(AActor* InteractionActor);
+	
+protected:
+	UPROPERTY()
+	TArray<TObjectPtr<AActor>> OverlappedActors;
+	
 	
 private:
 	UPROPERTY()

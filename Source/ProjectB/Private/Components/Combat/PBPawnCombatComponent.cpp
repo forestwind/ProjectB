@@ -3,6 +3,9 @@
 
 #include "Components/Combat/PBPawnCombatComponent.h"
 
+#include "Components/BoxComponent.h"
+#include "Items/Weapons/PBWeaponBase.h"
+
 void UPBPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegister, APBWeaponBase* InWeaponToRegister, bool bRegisterAsEquippedWeapon)
 {
 	checkf(!CharacterCarriedWeaponMap.Contains(InWeaponTagToRegister), TEXT("%s Tag has already been registered Weapon "), *InWeaponTagToRegister.ToString())
@@ -10,6 +13,9 @@ void UPBPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag InWeaponTagToReg
 
 	CharacterCarriedWeaponMap.Emplace(InWeaponTagToRegister, InWeaponToRegister);
 
+	InWeaponToRegister->OnWeaponHitTarget.BindUObject(this, &ThisClass::OnHitTargetActor);
+	InWeaponToRegister->OnWeaponPulledFromTarget.BindUObject(this, &ThisClass::OnWeaponPulledFromTargetActor);
+	
 	if (bRegisterAsEquippedWeapon)
 	{
 		CurrentEquippedWeaponTag = InWeaponTagToRegister;
@@ -34,4 +40,32 @@ APBWeaponBase* UPBPawnCombatComponent::GetCharacterCurrentEquippedWeapon() const
 	}
 
 	return GetCharacterCarriedWeaponByTag(CurrentEquippedWeaponTag);
+}
+
+void UPBPawnCombatComponent::ToggleWeaponCollision(bool bShouldEnable, EPBToggleDamageType ToggleDamageType)
+{
+	if (ToggleDamageType == EPBToggleDamageType::CurrentEquippedWeapon)
+	{
+		APBWeaponBase* WeaponToToggle =  GetCharacterCurrentEquippedWeapon();
+		check(WeaponToToggle);
+		
+		if (bShouldEnable)
+		{
+			WeaponToToggle->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		}
+		else
+		{
+			WeaponToToggle->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			
+			OverlappedActors.Empty();
+		}
+	}
+}
+
+void UPBPawnCombatComponent::OnHitTargetActor(AActor* HitActor)
+{
+}
+
+void UPBPawnCombatComponent::OnWeaponPulledFromTargetActor(AActor* InteractionActor)
+{
 }

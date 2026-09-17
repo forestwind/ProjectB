@@ -23,6 +23,10 @@ class PROJECTB_API APBPlayerCharacter : public APBBaseCharacter
 public:
 	APBPlayerCharacter();
 
+	//~ Begin IPBPawnCombatInterface Interface.
+	virtual UPBPawnCombatComponent* GetPBPawnCombatComponent() const override;
+	//~ End IPBPawnCombatInterface Interface
+	
 protected:
 	//~ Begin APawn Interface.
 	virtual void PossessedBy(AController* NewController) override;

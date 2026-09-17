@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystem/PBAbilitySystemComponent.h"
+#include "Interfaces/PBPawnCombatInterface.h"
 
 UPBAbilitySystemComponent* UPBFunctionLibrary::NativeGetPBASCFromActor(AActor* InActor)
 {
@@ -57,5 +58,26 @@ bool UPBFunctionLibrary::NativeDoesActorHaveTag(AActor* InActor, FGameplayTag Ta
 
 void UPBFunctionLibrary::BP_DoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, EPBConfirmType& OutConfirmType)
 {
-	OutConfirmType = NativeDoesActorHaveTag(InActor,TagToCheck) ? EPBConfirmType::Yes : EPBConfirmType::No;
+	OutConfirmType = NativeDoesActorHaveTag(InActor, TagToCheck) ? EPBConfirmType::Yes : EPBConfirmType::No;
+}
+
+UPBPawnCombatComponent* UPBFunctionLibrary::NativeGetPBPawnCombatComponentFromActor(AActor* InActor)
+{
+	check(InActor);
+
+	if (IPBPawnCombatInterface* PawnCombatInterface = Cast<IPBPawnCombatInterface>(InActor))
+	{
+		return PawnCombatInterface->GetPBPawnCombatComponent();
+	}
+
+	return nullptr;
+}
+
+UPBPawnCombatComponent* UPBFunctionLibrary::BP_GetPBPawnCombatComponentFromActor(AActor* InActor, EPBValidType& OutValidType)
+{
+	UPBPawnCombatComponent* CombatComponent = NativeGetPBPawnCombatComponentFromActor(InActor);
+
+	OutValidType = CombatComponent ? EPBValidType::Valid : EPBValidType::Invalid;
+
+	return CombatComponent;
 }

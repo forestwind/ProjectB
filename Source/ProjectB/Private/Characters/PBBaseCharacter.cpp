@@ -19,6 +19,11 @@ UAbilitySystemComponent* APBBaseCharacter::GetAbilitySystemComponent() const
 	return PBAbilitySystemComponent;
 }
 
+UPBPawnCombatComponent* APBBaseCharacter::GetPBPawnCombatComponent() const
+{
+	return nullptr;
+}
+
 void APBBaseCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);

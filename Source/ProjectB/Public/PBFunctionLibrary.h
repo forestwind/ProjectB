@@ -5,16 +5,11 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GameplayTagContainer.h"
+#include "PBEnumTypes.h"
 #include "PBFunctionLibrary.generated.h"
 
 class UPBAbilitySystemComponent;
-
-UENUM()
-enum class EPBConfirmType : uint8
-{
-	Yes,
-	No,
-};
+class UPBPawnCombatComponent;
 
 /**
  * 
@@ -37,4 +32,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category ="PB|FunctionLibrary", meta=(DisplayName = "Does Actor Have Tag", ExpandEnumAsExecs = "OutConfirmType"))
 	static void BP_DoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, EPBConfirmType& OutConfirmType);
+	
+	static UPBPawnCombatComponent* NativeGetPBPawnCombatComponentFromActor(AActor* InActor);
+	
+	UFUNCTION(BlueprintCallable, Category ="PB|FunctionLibrary", meta=(DisplayName = "Get PB Pawn Combat Component From Actor", ExpandEnumAsExecs = "OutValidType"))
+	static UPBPawnCombatComponent* BP_GetPBPawnCombatComponentFromActor(AActor* InActor, EPBValidType& OutValidType);
 };

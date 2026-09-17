@@ -12,6 +12,8 @@ class PROJECTB_API UPBPawnExtensionComponentBase : public UActorComponent
 {
 	GENERATED_BODY()
 
+protected:
+	
 	template <class T>
 	T* GetOwningPawn() const
 	{
