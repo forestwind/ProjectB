@@ -5,7 +5,7 @@
 
 #include "Characters/PBEnemyCharacter.h"
 
-APBEnemyCharacter* UPBEnemyGameplayAbility::GetEnemyCharacterFromActorInfo()
+APBEnemyCharacter* UPBEnemyGameplayAbility::GetPBEnemyCharacterFromActorInfo()
 {
 	if (!CachedPbEnemyCharacter.IsValid())
 	{
@@ -15,7 +15,7 @@ APBEnemyCharacter* UPBEnemyGameplayAbility::GetEnemyCharacterFromActorInfo()
 	return CachedPbEnemyCharacter.Get();
 }
 
-UPBEnemyCombatComponent* UPBEnemyGameplayAbility::GetEnemyCombatComponentFromActorInfo()
+UPBEnemyCombatComponent* UPBEnemyGameplayAbility::GetPBEnemyCombatComponentFromActorInfo()
 {
-	return GetEnemyCharacterFromActorInfo()->GetEnemyCombatComponent();
+	return GetPBEnemyCharacterFromActorInfo()->GetEnemyCombatComponent();
 }

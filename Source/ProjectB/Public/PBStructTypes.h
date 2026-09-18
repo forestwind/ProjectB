@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameplayTagContainer.h"
+#include "ScalableFloat.h"
 #include "PBStructTypes.generated.h"
 
 class UInputMappingContext;
@@ -36,4 +37,10 @@ struct FPBPlayerWeaponData
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
 	TArray<FPBPlayerAbilitySet> DefaultWeaponAbilities;
+	
+	/**
+	 * 
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FScalableFloat WeaponBaseDamage;
 };

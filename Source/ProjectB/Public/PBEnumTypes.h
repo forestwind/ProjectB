@@ -13,3 +13,11 @@ enum class EPBValidType : uint8
 	Valid,
 	Invalid,
 };
+
+
+UENUM()
+enum class EPBSuccessType : uint8
+{
+	Successful,
+	Failed,
+};

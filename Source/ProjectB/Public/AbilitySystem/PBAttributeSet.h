@@ -25,6 +25,8 @@ class PROJECTB_API UPBAttributeSet : public UAttributeSet
 public:
 	UPBAttributeSet();
 	
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+	
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	FGameplayAttributeData CurrentHealth;
 	ATTRIBUTE_ACCESSORS(UPBAttributeSet, CurrentHealth)
@@ -46,7 +48,11 @@ public:
 	ATTRIBUTE_ACCESSORS(UPBAttributeSet, AttackPower)
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Damage")
-	FGameplayAttributeData DefencePower;
-	ATTRIBUTE_ACCESSORS(UPBAttributeSet, DefencePower)
+	FGameplayAttributeData DefensePower;
+	ATTRIBUTE_ACCESSORS(UPBAttributeSet, DefensePower)
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Damage")
+	FGameplayAttributeData DamageTaken;
+	ATTRIBUTE_ACCESSORS(UPBAttributeSet, DamageTaken)
 	
 };

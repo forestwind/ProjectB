@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
+#include "PBEnumTypes.h"
 #include "PBGameplayAbility.generated.h"
 
 class UPBPawnCombatComponent;
@@ -39,4 +40,9 @@ protected:
 	
 	UFUNCTION(BlueprintPure, Category = "PBAbility")
 	UPBAbilitySystemComponent* GetPBAbilitySystemComponentFromActorInfo() const;
+	
+	FActiveGameplayEffectHandle NativeApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle);
+	
+	UFUNCTION(BlueprintCallable, Category = "PBAbility", meta = (DisplayName = "Apply Gameplay Effect Spec Handle To Target Actor" , ExpandEnumAsExecs = "OutSuccessType"))
+	FActiveGameplayEffectHandle BP_ApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle, EPBSuccessType& OutSuccessType);
 };

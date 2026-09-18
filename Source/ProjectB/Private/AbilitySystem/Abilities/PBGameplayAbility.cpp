@@ -2,6 +2,8 @@
 
 
 #include "AbilitySystem/Abilities/PBGameplayAbility.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystem/PBAbilitySystemComponent.h"
 #include "Components/Combat/PBPawnCombatComponent.h"
 
@@ -39,4 +41,22 @@ UPBPawnCombatComponent* UPBGameplayAbility::GetPBPawnCombatComponentFromActorInf
 UPBAbilitySystemComponent* UPBGameplayAbility::GetPBAbilitySystemComponentFromActorInfo() const
 {
 	return Cast<UPBAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
+}
+
+FActiveGameplayEffectHandle UPBGameplayAbility::NativeApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle)
+{
+	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
+	
+	check(TargetASC && InSpecHandle.IsValid());
+	
+	return GetPBAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(*InSpecHandle.Data, TargetASC);
+}
+
+FActiveGameplayEffectHandle UPBGameplayAbility::BP_ApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle, EPBSuccessType& OutSuccessType)
+{
+	FActiveGameplayEffectHandle ActiveGameplayEffectHandle = NativeApplyEffectSpecHandleToTarget(TargetActor, InSpecHandle);
+	
+	OutSuccessType = ActiveGameplayEffectHandle.WasSuccessfullyApplied() ? EPBSuccessType::Successful : EPBSuccessType::Failed;
+	
+	return ActiveGameplayEffectHandle;
 }

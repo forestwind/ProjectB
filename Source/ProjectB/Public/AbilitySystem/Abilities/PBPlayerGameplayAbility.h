@@ -27,6 +27,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "PBAbility")
 	UPBPlayerCombatComponent* GetPBPlayerCombatComponentFromActorInfo();
 	
+	UFUNCTION(BlueprintPure, Category = "PBAbility")
+	FGameplayEffectSpecHandle MakePlayerDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, float InWeaponBaseDamage, FGameplayTag InCurrentAttackTypeTag, int32 InUsedComboCount);
+	
 private:
 	TWeakObjectPtr<APBPlayerCharacter> CachedPBPlayerCharacter;
 	TWeakObjectPtr<APBPlayerController> CachedPBPlayerController;

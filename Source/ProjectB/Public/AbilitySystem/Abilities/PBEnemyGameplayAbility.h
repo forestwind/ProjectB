@@ -18,10 +18,10 @@ class PROJECTB_API UPBEnemyGameplayAbility : public UPBGameplayAbility
 	
 public:
 	UFUNCTION(BlueprintPure, Category = "PB|Ability")
-	APBEnemyCharacter* GetEnemyCharacterFromActorInfo();
+	APBEnemyCharacter* GetPBEnemyCharacterFromActorInfo();
 	
 	UFUNCTION(BlueprintPure, Category = "PB|Ability")
-	UPBEnemyCombatComponent* GetEnemyCombatComponentFromActorInfo();
+	UPBEnemyCombatComponent* GetPBEnemyCombatComponentFromActorInfo();
 	
 private:
 	TWeakObjectPtr<APBEnemyCharacter> CachedPbEnemyCharacter;

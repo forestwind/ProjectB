@@ -13,6 +13,16 @@ APBPlayerWeapon* UPBPlayerCombatComponent::GetPlayerCarriedWeaponByTag(FGameplay
 	return Cast<APBPlayerWeapon>(GetCharacterCarriedWeaponByTag(InWeaponTag));
 }
 
+APBPlayerWeapon* UPBPlayerCombatComponent::GetPlayerCurrentEquippedWeapon() const
+{
+	return Cast<APBPlayerWeapon>(GetCharacterCurrentEquippedWeapon());
+}
+
+float UPBPlayerCombatComponent::GetPlayerCurrentEquippedWeaponDamageAtLevel(float InLevel) const
+{
+	return GetPlayerCurrentEquippedWeapon()->PlayerWeaponData.WeaponBaseDamage.GetValueAtLevel(InLevel);
+}
+
 void UPBPlayerCombatComponent::OnHitTargetActor(AActor* HitActor)
 {
 	Super::OnHitTargetActor(HitActor);
@@ -29,9 +39,13 @@ void UPBPlayerCombatComponent::OnHitTargetActor(AActor* HitActor)
 	Data.Target = HitActor;
 
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetOwningPawn(), PBGameplayTags::Shared_Event_MeleeHit, Data);
+
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetOwningPawn(), PBGameplayTags::Player_Event_HitPause, FGameplayEventData());
 }
 
 void UPBPlayerCombatComponent::OnWeaponPulledFromTargetActor(AActor* InteractionActor)
 {
 	Super::OnWeaponPulledFromTargetActor(InteractionActor);
+	
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetOwningPawn(), PBGameplayTags::Player_Event_HitPause, FGameplayEventData());
 }
