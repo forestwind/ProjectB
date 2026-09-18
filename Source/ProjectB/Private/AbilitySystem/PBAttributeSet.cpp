@@ -3,6 +3,8 @@
 
 #include "AbilitySystem/PBAttributeSet.h"
 #include "GameplayEffectExtension.h"
+#include "PBFunctionLibrary.h"
+#include "PBGameplayTags.h"
 
 #include "PBDebugHelper.h"
 
@@ -49,6 +51,7 @@ void UPBAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModC
 		
 		if (NewCurrentHealth == 0.0f)
 		{
+			UPBFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(),PBGameplayTags::Shared_Status_Dead);
 		}
 	}
 }
