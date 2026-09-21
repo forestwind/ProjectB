@@ -14,6 +14,7 @@ GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
 GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+class IPBPawnUIInterface;
 /**
  * 
  */
@@ -55,4 +56,6 @@ public:
 	FGameplayAttributeData DamageTaken;
 	ATTRIBUTE_ACCESSORS(UPBAttributeSet, DamageTaken)
 	
+private:
+	TWeakInterfacePtr<IPBPawnUIInterface> CachedPawnUIInterface;
 };

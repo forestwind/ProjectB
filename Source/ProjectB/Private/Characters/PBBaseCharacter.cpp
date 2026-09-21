@@ -24,6 +24,11 @@ UPBPawnCombatComponent* APBBaseCharacter::GetPBPawnCombatComponent() const
 	return nullptr;
 }
 
+UPBPawnUIComponent* APBBaseCharacter::GetPBPawnUIComponent() const
+{
+	return nullptr;
+}
+
 void APBBaseCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);

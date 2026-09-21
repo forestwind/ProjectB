@@ -14,6 +14,8 @@
 #include "DataAssets/StartUpData/PBStartUpDataBase.h"
 #include "AbilitySystem/PBAbilitySystemComponent.h"
 #include "Components/Combat/PBPlayerCombatComponent.h"
+#include "Components/UI/PBPlayerUIComponent.h"
+
 #include "PBDebugHelper.h"
 
 APBPlayerCharacter::APBPlayerCharacter()
@@ -40,11 +42,23 @@ APBPlayerCharacter::APBPlayerCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
 
 	PlayerCombatComponent = CreateDefaultSubobject<UPBPlayerCombatComponent>("PlayerCombatComponent");
+	
+	PlayerUIComponent = CreateDefaultSubobject<UPBPlayerUIComponent>("PlayerUIComponent");
 }
 
 UPBPawnCombatComponent* APBPlayerCharacter::GetPBPawnCombatComponent() const
 {
 	return PlayerCombatComponent;
+}
+
+UPBPawnUIComponent* APBPlayerCharacter::GetPBPawnUIComponent() const
+{
+	return PlayerUIComponent;
+}
+
+UPBPlayerUIComponent* APBPlayerCharacter::GetPBPlayerUIComponent() const
+{
+	return PlayerUIComponent;
 }
 
 void APBPlayerCharacter::PossessedBy(AController* NewController)

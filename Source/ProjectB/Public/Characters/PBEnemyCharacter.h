@@ -6,6 +6,8 @@
 #include "Characters/PBBaseCharacter.h"
 #include "PBEnemyCharacter.generated.h"
 
+class UWidgetComponent;
+class UPBEnemyUIComponent;
 class UPBEnemyCombatComponent;
 /**
  * 
@@ -22,7 +24,14 @@ public:
 	virtual UPBPawnCombatComponent* GetPBPawnCombatComponent() const override;
 	//~ End IPBPawnCombatInterface Interface
 	
+	//~ Begin IPBPawnUIInterface Interface.
+	virtual UPBPawnUIComponent* GetPBPawnUIComponent() const override;
+	virtual UPBEnemyUIComponent* GetPBEnemyUIComponent() const override;
+	//~ End IPBPawnUIInterface Interface
+	
 protected:
+	
+	virtual void BeginPlay() override;
 	
 	//~ Begin APawn Interface.
 	virtual void PossessedBy(AController* NewController) override;
@@ -30,6 +39,12 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat")
 	TObjectPtr<UPBEnemyCombatComponent> EnemyCombatComponent;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
+	TObjectPtr<UPBEnemyUIComponent> EnemyUIComponent;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
+	TObjectPtr<UWidgetComponent> EnemyHealthWidgetComponent;
 
 private:
 	void InitEnemyStartUpData();

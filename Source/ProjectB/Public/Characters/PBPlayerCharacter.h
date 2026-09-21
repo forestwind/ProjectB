@@ -12,6 +12,7 @@ class UCameraComponent;
 class UPBInputConfig;
 struct FInputActionValue;
 class UPBPlayerCombatComponent;
+class UPBPlayerUIComponent;
 /**
  *
  */
@@ -26,6 +27,11 @@ public:
 	//~ Begin IPBPawnCombatInterface Interface.
 	virtual UPBPawnCombatComponent* GetPBPawnCombatComponent() const override;
 	//~ End IPBPawnCombatInterface Interface
+	
+	//~ Begin IPBPawnUIInterface Interface.
+	virtual UPBPawnUIComponent* GetPBPawnUIComponent() const override;
+	virtual UPBPlayerUIComponent* GetPBPlayerUIComponent() const override;
+	//~ End IPBPawnUIInterface Interface
 	
 protected:
 	//~ Begin APawn Interface.
@@ -45,6 +51,10 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UPBPlayerCombatComponent> PlayerCombatComponent;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="UI", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UPBPlayerUIComponent> PlayerUIComponent;
+	
 #pragma endregion
 
 

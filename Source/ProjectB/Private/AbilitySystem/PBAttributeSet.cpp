@@ -5,7 +5,9 @@
 #include "GameplayEffectExtension.h"
 #include "PBFunctionLibrary.h"
 #include "PBGameplayTags.h"
-
+#include "Interfaces/PBPawnUIInterface.h"
+#include "Components/UI/PBPawnUIComponent.h"
+#include "Components/UI/PBPlayerUIComponent.h"
 #include "PBDebugHelper.h"
 
 UPBAttributeSet::UPBAttributeSet()
@@ -20,11 +22,24 @@ UPBAttributeSet::UPBAttributeSet()
 
 void UPBAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
 {
+	if (!CachedPawnUIInterface.IsValid())
+	{
+		CachedPawnUIInterface = TWeakInterfacePtr<IPBPawnUIInterface>(Data.Target.GetAvatarActor());
+	}
+
+	checkf(CachedPawnUIInterface.IsValid(), TEXT("%s didn't implement IPBPawnUIInterface"), *Data.Target.GetAvatarActor()->GetActorNameOrLabel());
+
+	UPBPawnUIComponent* PawnUIComponent = CachedPawnUIInterface->GetPBPawnUIComponent();
+
+	checkf(PawnUIComponent, TEXT("Could not extrac a PBPawnUIComponent form %s "), *Data.Target.GetAvatarActor()->GetActorNameOrLabel());
+
 	if (Data.EvaluatedData.Attribute == GetCurrentHealthAttribute())
 	{
 		const float NewCurrentHealth = FMath::Clamp(GetCurrentHealth(), 0.0f, GetMaxHealth());
 
 		SetCurrentHealth(NewCurrentHealth);
+
+		PawnUIComponent->OnCurrentHealthChanged.Broadcast(GetCurrentHealth() / GetMaxHealth());
 	}
 
 	if (Data.EvaluatedData.Attribute == GetCurrentRageAttribute())
@@ -32,6 +47,11 @@ void UPBAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModC
 		const float NewCurrentRage = FMath::Clamp(GetCurrentRage(), 0.0f, GetMaxRage());
 
 		SetCurrentRage(NewCurrentRage);
+		
+		if (UPBPlayerUIComponent* PlayerUIComponent = CachedPawnUIInterface->GetPBPlayerUIComponent())
+		{
+			PlayerUIComponent->OnCurrentRageChanged.Broadcast(GetCurrentRage() / GetMaxRage());
+		}
 	}
 
 	if (Data.EvaluatedData.Attribute == GetDamageTakenAttribute())
@@ -47,11 +67,13 @@ void UPBAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModC
 			TEXT("Old Health : %f , Damage Done : %f , NewCurrent Health : %f "),
 			OldHealth, DamageDone, NewCurrentHealth);
 
-		Debug::Log(DebugString,FColor::Red);
+		Debug::Log(DebugString, FColor::Red);
 		
-		if (NewCurrentHealth == 0.0f)
+		PawnUIComponent->OnCurrentHealthChanged.Broadcast(GetCurrentHealth() / GetMaxHealth());
+		
+		if (GetCurrentHealth() == 0.0f)
 		{
-			UPBFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(),PBGameplayTags::Shared_Status_Dead);
+			UPBFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(), PBGameplayTags::Shared_Status_Dead);
 		}
 	}
 }
