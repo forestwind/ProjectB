@@ -3,3 +3,12 @@
 
 #include "Controllers/PBPlayerController.h"
 
+APBPlayerController::APBPlayerController()
+{
+	PlayerTeamID = FGenericTeamId(0);
+}
+
+FGenericTeamId APBPlayerController::GetGenericTeamId() const
+{
+	return PlayerTeamID;
+}
