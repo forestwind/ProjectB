@@ -43,6 +43,7 @@ namespace PBGameplayTags
 	
 	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Weapon);
 	
+	PROJECTB_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Strafing);
 	
 	/** Shared **/
 	

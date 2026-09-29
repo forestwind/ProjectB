@@ -3,6 +3,7 @@
 
 #include "AnimInstances/PBCharacterAnimInstance.h"
 
+#include "KismetAnimationLibrary.h"
 #include "Characters/PBBaseCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -29,4 +30,7 @@ void UPBCharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSecond
 	
 	GroundSpeed = OwningCharacter->GetVelocity().Size2D();
 	bHasAcceleration = OwningMovementComponent->GetCurrentAcceleration().SizeSquared2D() > 0.0f;
+	
+	LocomotionDirection = UKismetAnimationLibrary::CalculateDirection(OwningCharacter->GetVelocity(), OwningCharacter->GetActorRotation());
+	
 }

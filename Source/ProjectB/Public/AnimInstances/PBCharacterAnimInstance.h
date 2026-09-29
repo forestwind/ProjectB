@@ -15,21 +15,24 @@ UCLASS()
 class PROJECTB_API UPBCharacterAnimInstance : public UPBBaseAnimInstance
 {
 	GENERATED_BODY()
-	
+
 public:
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds) override;
-	
+
 protected:
 	UPROPERTY()
 	TObjectPtr<APBBaseCharacter> OwningCharacter;
-	
+
 	UPROPERTY()
 	TObjectPtr<UCharacterMovementComponent> OwningMovementComponent;
-	
+
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomotionData")
 	float GroundSpeed;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomotionData")
+	bool bHasAcceleration;
 	
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomotionData")
-	bool bHasAcceleration; 
+	float LocomotionDirection;
 };
