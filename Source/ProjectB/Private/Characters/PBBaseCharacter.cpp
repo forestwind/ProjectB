@@ -5,6 +5,7 @@
 
 #include "AbilitySystem/PBAbilitySystemComponent.h"
 #include "AbilitySystem/PBAttributeSet.h"
+#include "MotionWarpingComponent.h"
 
 APBBaseCharacter::APBBaseCharacter()
 {
@@ -12,6 +13,8 @@ APBBaseCharacter::APBBaseCharacter()
 
 	PBAbilitySystemComponent = CreateDefaultSubobject<UPBAbilitySystemComponent>(TEXT("PBAbilitySystemComponent"));
 	PBAttributeSet = CreateDefaultSubobject<UPBAttributeSet>(TEXT("PBAttributeSet"));
+	
+	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("MotionWarpingComponent"));
 }
 
 UAbilitySystemComponent* APBBaseCharacter::GetAbilitySystemComponent() const

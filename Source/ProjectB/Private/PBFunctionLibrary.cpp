@@ -4,6 +4,7 @@
 #include "PBFunctionLibrary.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "GenericTeamAgentInterface.h"
 #include "AbilitySystem/PBAbilitySystemComponent.h"
 #include "Interfaces/PBPawnCombatInterface.h"
 
@@ -80,4 +81,19 @@ UPBPawnCombatComponent* UPBFunctionLibrary::BP_GetPBPawnCombatComponentFromActor
 	OutValidType = CombatComponent ? EPBValidType::Valid : EPBValidType::Invalid;
 
 	return CombatComponent;
+}
+
+bool UPBFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn)
+{
+	check(QueryPawn && TargetPawn);
+	
+	IGenericTeamAgentInterface* QueryTeamAgent = Cast<IGenericTeamAgentInterface>(QueryPawn->GetController());
+	IGenericTeamAgentInterface* TargetTeamAgent = Cast<IGenericTeamAgentInterface>(TargetPawn->GetController());
+	
+	if (QueryTeamAgent && TargetTeamAgent)
+	{
+		return QueryTeamAgent->GetGenericTeamId()!= TargetTeamAgent->GetGenericTeamId();	
+	}
+	
+	return false;
 }

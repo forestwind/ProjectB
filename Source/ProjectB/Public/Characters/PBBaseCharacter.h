@@ -12,6 +12,7 @@
 class UPBStartUpDataBase;
 class UPBAttributeSet;
 class UPBAbilitySystemComponent;
+class UMotionWarpingComponent;
 
 UCLASS()
 class PROJECTB_API APBBaseCharacter : public ACharacter, public IAbilitySystemInterface, public IPBPawnCombatInterface, public IPBPawnUIInterface
@@ -44,6 +45,9 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AbilitySystem")
 	TObjectPtr<UPBAttributeSet> PBAttributeSet;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="MotionWarping")
+	TObjectPtr<UMotionWarpingComponent> MotionWarpingComponent;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="CharacterData")
 	TSoftObjectPtr<UPBStartUpDataBase> CharacterStartUpData;

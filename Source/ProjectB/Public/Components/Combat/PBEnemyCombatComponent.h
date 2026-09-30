@@ -14,4 +14,6 @@ class PROJECTB_API UPBEnemyCombatComponent : public UPBPawnCombatComponent
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void OnHitTargetActor(AActor* HitActor) override;
 };
