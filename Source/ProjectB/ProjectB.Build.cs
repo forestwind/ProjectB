@@ -20,6 +20,7 @@ public class ProjectB : ModuleRules
 			"AIModule",
 			"AnimGraphRuntime",
 			"MotionWarping",
+			"LootInventory",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
