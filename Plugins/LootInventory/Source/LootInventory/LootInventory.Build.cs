@@ -8,7 +8,6 @@ public class LootInventory : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		// 우선 전부 Public으로 두고, 헤더에 노출되지 않는 모듈은 나중에 Private으로 옮긴다.
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{

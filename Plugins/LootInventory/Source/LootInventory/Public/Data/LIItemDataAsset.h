@@ -7,9 +7,7 @@
 #include "LIStructTypes.h"
 #include "LIItemDataAsset.generated.h"
 
-/**
- * 아이템 리소스 데이터의 기반. ItemId → 리소스 구조체 맵을 가진다.
- */
+// 아이템 리소스 데이터 기반 (ItemId → 리소스 구조체 맵)
 UCLASS(Abstract, BlueprintType)
 class LOOTINVENTORY_API ULIItemDataAssetBase : public UPrimaryDataAsset
 {

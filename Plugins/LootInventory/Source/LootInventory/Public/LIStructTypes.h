@@ -9,9 +9,9 @@
 
 class UTexture2D;
 
-/* ───────── 행 구조체 (CSV → DataTable, 기획 데이터) ───────── */
+/* ───────── 행 구조체 (DataTable Row) ───────── */
 
-// 모든 아이템 행의 기반
+// 아이템 행 기반
 USTRUCT(BlueprintType)
 struct LOOTINVENTORY_API FLIItemRowBase : public FTableRowBase
 {
@@ -27,11 +27,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 MaxStack = 1;
 
-	// 타입은 행 구조체가 결정 (CSV 컬럼 아님)
+	// 행 구조체별 아이템 타입 태그
 	virtual FGameplayTag GetItemType() const { return FGameplayTag(); }
 };
 
-// 샘플 타입. 새 타입은 이 구조체처럼 FLIItemRowBase를 상속하고 전용 필드를 추가한다
+// 샘플 타입 행
 USTRUCT(BlueprintType)
 struct LOOTINVENTORY_API FLISampleItemRow : public FLIItemRowBase
 {
@@ -41,9 +41,9 @@ public:
 	virtual FGameplayTag GetItemType() const override;
 };
 
-/* ───────── 에셋 구조체 (에디터에서 지정, 리소스 참조) ───────── */
+/* ───────── 리소스 구조체 (DataAsset 맵 값) ───────── */
 
-// 모든 아이템 리소스의 기반
+// 아이템 리소스 기반
 USTRUCT(BlueprintType)
 struct LOOTINVENTORY_API FLIItemAssetsBase
 {
@@ -56,7 +56,7 @@ public:
 	TSoftObjectPtr<UTexture2D> Icon;
 };
 
-// 샘플 타입 리소스. 전용 리소스는 이 구조체처럼 FLIItemAssetsBase를 상속해 추가한다
+// 샘플 타입 리소스
 USTRUCT(BlueprintType)
 struct LOOTINVENTORY_API FLISampleItemAssets : public FLIItemAssetsBase
 {
