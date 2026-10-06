@@ -23,5 +23,11 @@ public class LootInventory : ModuleRules
 				"EnhancedInput",
 			}
 			);
+		
+		// 에디터 빌드일 때만 추가 (쿡 목록 검사용) 
+		if (Target.bBuildEditor)
+		{
+			PrivateDependencyModuleNames.Add("DeveloperToolSettings");
+		}
 	}
 }

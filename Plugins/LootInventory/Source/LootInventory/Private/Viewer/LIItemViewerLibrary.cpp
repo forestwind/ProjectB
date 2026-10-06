@@ -3,7 +3,6 @@
 #include "Viewer/LIItemViewerLibrary.h"
 #include "Engine/DataTable.h"
 #include "GameplayTagContainer.h"
-#include "LIStructTypes.h"
 #include "Data/LIItemDataAsset.h"
 #include "UObject/UnrealType.h"
 

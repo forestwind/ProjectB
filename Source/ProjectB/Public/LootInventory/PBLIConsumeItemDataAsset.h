@@ -25,7 +25,7 @@ public:
 	virtual FGameplayTag GetItemType() const override;
 };
 
-// 아이템 리소스 (언리얼 에디터에서 지정해야 될것)                      
+// 아이템 리소스 (언리얼 에디터에서 연결)                      
 USTRUCT(BlueprintType)                                                               
 struct FPBLIConsumeItemAssets : public FLIItemAssetsBase                               
 {                                                                                    
@@ -36,6 +36,7 @@ public:
 	TSoftClassPtr<UGameplayEffect> UseEffect;                                      
 };
 
+// 아이템 리소스 묶음 Key: ItemID
 /**
  * 
  */
