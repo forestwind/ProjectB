@@ -140,7 +140,14 @@ void ULIItemSubsystem::CheckCookDirectories() const
 		// 실제 로드한 테이블이 아니라 묶음에 지정된 원래 테이블 경로 (교체 테이블은 런타임 생성이라 폴더 없음)
 		DataFolders.Add(FPackageName::GetLongPackagePath(ItemDataAsset->ItemTable.GetLongPackageName()));
 	}
-	
+
+	// 드롭 테이블 폴더 (Settings에 지정된 경우만, IsNull: 칸이 비어 있으면 true)
+	const ULILootSettings* Settings = GetDefault<ULILootSettings>();
+	if (!Settings->DropTable.IsNull())
+	{
+		DataFolders.Add(FPackageName::GetLongPackagePath(Settings->DropTable.GetLongPackageName()));
+	}
+
 	const UProjectPackagingSettings* PackagingSettings = GetDefault<UProjectPackagingSettings>();
 
 	for (const FString& DataFolder : DataFolders)
