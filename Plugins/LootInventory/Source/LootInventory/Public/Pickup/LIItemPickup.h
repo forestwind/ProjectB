@@ -42,11 +42,25 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	int32 Count = 1;
 
+	// 생성 후 줍기까지 대기 시간 (초, 0이면 바로 줍기 가능)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
+	float PickupDelay = 0.5f;
+
 private:
+	// 대기 시간이 끝나면 줍기 활성화
+	void EnablePickup();
+
+	// 줍기 시도
+	void TryPickup(AActor* InActor);
+
+	// 겹침 이벤트 연결 함수
 	UFUNCTION()
 	void HandleBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	// 한 번만 획득 (플레이어 캡슐·메시가 동시에 닿아도 중복 추가 방지)
+	// 중복 추가 방지
 	bool bPickedUp = false;
+
+	// 줍기 대기 타이머
+	FTimerHandle PickupDelayTimer;
 };

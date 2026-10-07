@@ -10,6 +10,10 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Engine/AssetManager.h"
 #include "Widgets/PBWidgetBase.h"
+#include "AbilitySystemComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "PBGameplayTags.h"
+#include "Subsystems/LILootSubsystem.h"
 
 APBEnemyCharacter::APBEnemyCharacter()
 {
@@ -56,6 +60,14 @@ void APBEnemyCharacter::BeginPlay()
 	{
 		HealthWidget->InitEnemyCreatedWidget(this);
 	}
+
+	// 드롭 그룹이 있는 경우만 이벤트 등록
+	if (DropGroupId != 0)
+	{
+		// RegisterGameplayTagEvent: 이 태그의 갯수 변경시 알림
+		GetAbilitySystemComponent()->RegisterGameplayTagEvent(PBGameplayTags::Shared_Status_Dead, EGameplayTagEventType::NewOrRemoved)
+			.AddUObject(this, &ThisClass::OnDeadTagChanged);
+	}
 }
 
 void APBEnemyCharacter::PossessedBy(AController* NewController)
@@ -84,4 +96,19 @@ void APBEnemyCharacter::InitEnemyStartUpData()
 			}
 		)
 	);
+}
+
+void APBEnemyCharacter::OnDeadTagChanged(const FGameplayTag InTag, int32 TagCount)
+{
+	if (TagCount <= 0)
+	{
+		return;
+	}
+
+	// 발밑 위치
+	const FVector FootLocation = GetActorLocation() - FVector(0.f, 0.f, GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
+
+	// 플러그인 드롭 서브시스템에 그룹 번호와 위치만 넘김 (굴림 → 픽업 생성은 플러그인이 처리)
+	ULILootSubsystem* Loot = GetGameInstance()->GetSubsystem<ULILootSubsystem>();
+	Loot->DropLoot(GetWorld(), DropGroupId, FootLocation);
 }

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Characters/PBBaseCharacter.h"
+#include "GameplayTagContainer.h"
 #include "PBEnemyCharacter.generated.h"
 
 class UWidgetComponent;
@@ -46,9 +47,17 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
 	TObjectPtr<UWidgetComponent> EnemyHealthWidgetComponent;
 
+	// LootInventory 드롭 그룹 (0이면 드롭 없음, BP 기본값 + 레벨에 배치한 적마다 변경 가능)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Loot")
+	int32 DropGroupId = 0;
+
 private:
 	void InitEnemyStartUpData();
-	
+
+	// 사망 태그(Shared.Status.Dead)가 붙으면 드롭
+	void OnDeadTagChanged(const FGameplayTag InTag, int32 TagCount);
+
 public:
 	FORCEINLINE UPBEnemyCombatComponent* GetEnemyCombatComponent() const { return EnemyCombatComponent; }
+	FORCEINLINE int32 GetDropGroupId() const { return DropGroupId; }
 };
