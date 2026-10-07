@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "GameplayTagContainer.h"
+#include "LIStructTypes.h"
 #include "LIItemSubsystem.generated.h"
 
 class UDataTable;
@@ -34,6 +35,10 @@ public:
 
 	const FLIItemRowBase* FindItemRow(int32 InItemId) const;
 	const FLIItemAssetsBase* FindItemAssets(int32 InItemId) const;
+
+	// ItemId의 UI 표시 정보
+	UFUNCTION(BlueprintCallable, BlueprintPure = false, Category = "LootInventory")
+	bool GetItemDisplayInfo(int32 InItemId, FLIItemDisplayInfo& OutInfo) const;
 
 private:
 	void AddTableRows(UDataTable* InItemTable, const ULIItemDataAssetBase* InItemDataAsset);

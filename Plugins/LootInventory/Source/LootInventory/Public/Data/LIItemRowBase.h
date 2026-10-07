@@ -17,6 +17,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 ItemId = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText DisplayName;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText Description;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Categories = "LI.Item.Rarity"))
 	FGameplayTag Rarity;
 

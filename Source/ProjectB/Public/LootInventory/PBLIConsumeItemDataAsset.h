@@ -16,12 +16,6 @@ struct FPBLIConsumeItemRow : public FLIItemRowBase
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FText DisplayName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FText Description;
-
 	virtual FGameplayTag GetItemType() const override;
 };
 

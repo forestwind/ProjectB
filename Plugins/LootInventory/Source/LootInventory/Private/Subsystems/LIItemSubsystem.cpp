@@ -4,6 +4,7 @@
 #include "Settings/LILootSettings.h"
 #include "Data/LIItemDataAsset.h"
 #include "Engine/DataTable.h"
+#include "Engine/Texture2D.h"
 
 #if WITH_EDITOR
 #include "Settings/ProjectPackagingSettings.h"
@@ -117,7 +118,6 @@ const FLIItemRowBase* ULIItemSubsystem::FindItemRow(int32 InItemId) const
 
 const FLIItemAssetsBase* ULIItemSubsystem::FindItemAssets(int32 InItemId) const
 {
-	// 리소스는 각 묶음의 FindAssets() 구현에 맡김 (뷰어와 같은 방식)
 	const FLIItemEntry* Entry = ItemIdToEntry.Find(InItemId);
 	if (Entry == nullptr)
 	{
@@ -125,6 +125,35 @@ const FLIItemAssetsBase* ULIItemSubsystem::FindItemAssets(int32 InItemId) const
 	}
 
 	return Entry->ItemDataAsset->FindAssets(InItemId);
+}
+
+bool ULIItemSubsystem::GetItemDisplayInfo(int32 InItemId, FLIItemDisplayInfo& OutInfo) const
+{
+	// 이전 값이 남지 않게 비우고 시작
+	OutInfo = FLIItemDisplayInfo();
+
+	const FLIItemEntry* Entry = ItemIdToEntry.Find(InItemId);
+	if (Entry == nullptr)
+	{
+		return false;
+	}
+	
+	const FLIItemRowBase* Row = Entry->Row;
+	OutInfo.ItemId = Row->ItemId;
+	OutInfo.DisplayName = Row->DisplayName;
+	OutInfo.Description = Row->Description;
+	OutInfo.Rarity = Row->Rarity;
+	OutInfo.ItemType = Row->GetItemType();
+	OutInfo.MaxStack = Row->MaxStack;
+
+	// 아이콘 로드
+	const FLIItemAssetsBase* Assets = Entry->ItemDataAsset->FindAssets(InItemId);
+	if (Assets != nullptr)
+	{
+		OutInfo.Icon = Assets->Icon.LoadSynchronous();
+	}
+
+	return true;
 }
 
 #if WITH_EDITOR
