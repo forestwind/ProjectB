@@ -170,11 +170,21 @@ void ULIItemSubsystem::CheckCookDirectories() const
 		DataFolders.Add(FPackageName::GetLongPackagePath(ItemDataAsset->ItemTable.GetLongPackageName()));
 	}
 
-	// 드롭 테이블 폴더 (Settings에 지정된 경우만, IsNull: 칸이 비어 있으면 true)
+	// 드롭 테이블 폴더 (Settings에 지정된 경우만)
 	const ULILootSettings* Settings = GetDefault<ULILootSettings>();
 	if (!Settings->DropTable.IsNull())
 	{
 		DataFolders.Add(FPackageName::GetLongPackagePath(Settings->DropTable.GetLongPackageName()));
+	}
+
+	// 픽업 BP 폴더 (C++ 클래스는 /Script/ 경로라 쿡 대상 아님)
+	if (!Settings->PickupClass.IsNull())
+	{
+		const FString PickupPackage = Settings->PickupClass.GetLongPackageName();
+		if (!PickupPackage.StartsWith(TEXT("/Script/")))
+		{
+			DataFolders.Add(FPackageName::GetLongPackagePath(PickupPackage));
+		}
 	}
 
 	const UProjectPackagingSettings* PackagingSettings = GetDefault<UProjectPackagingSettings>();
