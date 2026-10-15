@@ -63,11 +63,11 @@ void UPBAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModC
 
 		SetCurrentHealth(NewCurrentHealth);
 
-		const FString DebugString = FString::Printf(
-			TEXT("Old Health : %f , Damage Done : %f , NewCurrent Health : %f "),
-			OldHealth, DamageDone, NewCurrentHealth);
-
-		Debug::Log(DebugString, FColor::Red);
+		// const FString DebugString = FString::Printf(
+		// 	TEXT("Old Health : %f , Damage Done : %f , NewCurrent Health : %f "),
+		// 	OldHealth, DamageDone, NewCurrentHealth);
+		//
+		// Debug::Log(DebugString, FColor::Red);
 		
 		PawnUIComponent->OnCurrentHealthChanged.Broadcast(GetCurrentHealth() / GetMaxHealth());
 		
