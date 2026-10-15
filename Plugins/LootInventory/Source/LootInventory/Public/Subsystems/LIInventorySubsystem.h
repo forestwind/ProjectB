@@ -22,6 +22,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "LootInventory")
 	bool AddItem(int32 InItemId, int32 InCount);
 
+	// 칸에서 1개 제거
+	UFUNCTION(BlueprintCallable, Category = "LootInventory")
+	bool RemoveItemFromSlot(int32 InSlotId);
+
 	UFUNCTION(BlueprintPure, Category = "LootInventory")
 	const TArray<FLIInventoryEntry>& GetEntries() const { return Entries; }
 
@@ -34,6 +38,9 @@ public:
 	FLIOnItemAdded OnItemAdded;
 
 private:
+	// 빈 칸 번호 찾기
+	int32 FindFreeSlotId() const;
+
 	UPROPERTY()
 	TArray<FLIInventoryEntry> Entries;
 };

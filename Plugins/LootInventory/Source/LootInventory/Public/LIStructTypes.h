@@ -17,6 +17,10 @@ struct LOOTINVENTORY_API FLIInventoryEntry
 	GENERATED_BODY()
 
 public:
+	// 칸 번호 (빈 번호 재사용)
+	UPROPERTY(BlueprintReadOnly)
+	int32 SlotId = 0;
+
 	UPROPERTY(BlueprintReadOnly)
 	int32 ItemId = 0;
 

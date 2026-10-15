@@ -54,7 +54,11 @@ bool ULIInventorySubsystem::AddItem(int32 InItemId, int32 InCount)
 	// 2. 남은 개수는 새 칸으로 (한 칸에 MaxStack까지)
 	while (Remaining > 0)
 	{
+		const int32 NewSlotId = FindFreeSlotId();
+
+		// 새 칸은 뒤에 추가
 		FLIInventoryEntry& NewEntry = Entries.AddDefaulted_GetRef();
+		NewEntry.SlotId = NewSlotId;
 		NewEntry.ItemId = InItemId;
 		NewEntry.Count = FMath::Min(MaxStack, Remaining);
 		Remaining -= NewEntry.Count;
@@ -65,6 +69,58 @@ bool ULIInventorySubsystem::AddItem(int32 InItemId, int32 InCount)
 	OnItemAdded.Broadcast(InItemId, InCount);
 	OnInventoryChanged.Broadcast();
 	return true;
+}
+
+bool ULIInventorySubsystem::RemoveItemFromSlot(int32 InSlotId)
+{
+	int32 FoundIndex = INDEX_NONE;
+	for (int32 Index = 0; Index < Entries.Num(); ++Index)
+	{
+		if (Entries[Index].SlotId == InSlotId)
+		{
+			FoundIndex = Index;
+			break;
+		}
+	}
+
+	if (FoundIndex == INDEX_NONE)
+	{
+		UE_LOG(LogLIInventory, Warning, TEXT("RemoveItemFromSlot: unknown SlotId %d"), InSlotId);
+		return false;
+	}
+
+	FLIInventoryEntry& Entry = Entries[FoundIndex];
+	const int32 RemovedItemId = Entry.ItemId;
+	Entry.Count -= 1;
+
+	// 0개면 칸 삭제
+	if (Entry.Count <= 0)
+	{
+		Entries.RemoveAt(FoundIndex);
+	}
+
+	UE_LOG(LogLIInventory, Log, TEXT("Removed ItemId %d from SlotId %d (slots: %d)"), RemovedItemId, InSlotId, Entries.Num());
+
+	OnInventoryChanged.Broadcast();
+	return true;
+}
+
+int32 ULIInventorySubsystem::FindFreeSlotId() const
+{
+	TSet<int32> UsedSlotIds;
+	for (const FLIInventoryEntry& Entry : Entries)
+	{
+		UsedSlotIds.Add(Entry.SlotId);
+	}
+
+	// 1부터 빈 번호 찾기
+	int32 SlotId = 1;
+	while (UsedSlotIds.Contains(SlotId))
+	{
+		++SlotId;
+	}
+
+	return SlotId;
 }
 
 // 테스트용 콘솔 명령 (Shipping 빌드에서는 코드가 빠짐)
