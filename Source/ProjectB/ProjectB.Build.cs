@@ -16,6 +16,7 @@ public class ProjectB : ModuleRules
 			"InputCore", 
 			"EnhancedInput",
 			"GameplayTags",
+			"GameplayAbilities",
 			"GameplayTasks", 
 			"AIModule",
 			"AnimGraphRuntime",

@@ -15,12 +15,10 @@ public class LootInventory : ModuleRules
 				"CoreUObject",
 				"Engine",
 				"GameplayTags",
-				"GameplayAbilities",
 				"DeveloperSettings",
 				"UMG",
 				"Slate",
 				"SlateCore",
-				"EnhancedInput",
 			}
 			);
 		
