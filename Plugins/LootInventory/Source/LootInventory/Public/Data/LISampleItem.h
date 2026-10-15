@@ -14,6 +14,8 @@ struct LOOTINVENTORY_API FLISampleItemRow : public FLIItemRowBase
 
 public:
 	virtual FGameplayTag GetItemType() const override;
+
+	// 타입에 필요한 기획 데이터 필드를 여기에 추가 (CSV 컬럼이 됨)
 };
 
 // 샘플 타입 리소스
@@ -21,6 +23,8 @@ USTRUCT(BlueprintType)
 struct LOOTINVENTORY_API FLISampleItemAssets : public FLIItemAssetsBase
 {
 	GENERATED_BODY()
+
+	// 타입에 필요한 리소스 필드를 여기에 추가 (예: Gameplay Effect, 메시)
 };
 
 // 샘플 타입 묶음
