@@ -18,13 +18,13 @@ struct LOOTINVENTORY_API FLIInventoryEntry
 
 public:
 	// 칸 번호 (빈 번호 재사용)
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	int32 SlotId = 0;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	int32 ItemId = 0;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	int32 Count = 0;
 };
 
@@ -36,24 +36,24 @@ struct LOOTINVENTORY_API FLIItemDisplayInfo
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	int32 ItemId = 0;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	FText DisplayName;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	FText Description;
 	
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	TObjectPtr<UTexture2D> Icon = nullptr;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	FGameplayTag Rarity;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	FGameplayTag ItemType;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	int32 MaxStack = 1;
 };

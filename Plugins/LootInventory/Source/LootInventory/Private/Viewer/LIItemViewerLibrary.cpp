@@ -5,6 +5,7 @@
 #include "GameplayTagContainer.h"
 #include "Data/LIItemDataAsset.h"
 #include "UObject/UnrealType.h"
+#include "UObject/TextProperty.h"
 
 namespace LIItemViewer
 {

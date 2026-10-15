@@ -17,10 +17,10 @@ struct LOOTINVENTORY_API FLIItemViewerField
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	FString Name;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "LootInventory")
 	FString Value;
 };
 

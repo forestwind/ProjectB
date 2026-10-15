@@ -14,19 +14,19 @@ struct LOOTINVENTORY_API FLIItemRowBase : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	int32 ItemId = 0;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	FText DisplayName;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	FText Description;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Categories = "LI.Item.Rarity"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory", meta = (Categories = "LI.Item.Rarity"))
 	FGameplayTag Rarity;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	int32 MaxStack = 1;
 
 	// 행 구조체별 아이템 타입 태그

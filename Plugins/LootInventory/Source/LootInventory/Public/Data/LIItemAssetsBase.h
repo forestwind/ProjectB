@@ -16,6 +16,6 @@ struct LOOTINVENTORY_API FLIItemAssetsBase
 public:
 	virtual ~FLIItemAssetsBase() = default;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	TSoftObjectPtr<UTexture2D> Icon;
 };

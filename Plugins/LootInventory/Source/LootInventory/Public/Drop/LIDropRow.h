@@ -13,19 +13,19 @@ struct LOOTINVENTORY_API FLIDropRow : public FTableRowBase
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	int32 DropGroupId = 0;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	int32 ItemId = 0;
 
 	// 만분률 (10000 = 100%)
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	int32 ChancePermyriad = 10000;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	int32 MinCount = 1;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "LootInventory")
 	int32 MaxCount = 1;
 };
